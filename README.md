@@ -1,10 +1,12 @@
 # asosamba
-para correr, 
-desde linea de comandos ejecutar (superusuario):
+Para correr, desde linea de comandos ejecutar (superusuario):
 ```sh
 sh prueba.sh
 sh copy.sh
 ```
+
+Guardar en el directorio 'cgi-bin/' los ejecutables (codigo compilado) y en 'htdocs/' los archivos .htm
+
 Incluir en nuevo programa la libreria funciones
 ```c
 #include "funciones.h"
