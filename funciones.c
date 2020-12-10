@@ -74,14 +74,16 @@ int correr(char *comando,char *archivo)
 char* devolver(char *comando){
     FILE *fp;
     int status;
-    char path[PATH_MAX];
+    char *path;
+    
+    path = malloc(MAXLEN);
 
     fp = popen(comando, "r");
     if (fp == NULL)
-        /* Handle error */;
+        printf("No se pudo ejecutar la accion");
 
-    while (fgets(path, PATH_MAX, fp) != NULL){
-        printf("%s", path);
+    while (fgets(path, MAXLEN, fp) != NULL){
+        printf("ejecutando ...\n");
     }
 
 

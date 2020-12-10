@@ -10,8 +10,10 @@ int main(void)
 {	
     char *inputBuffer;
     char prueba[80];
-    int funciona;
     char inst[] = "inst";
+    char comando1[] = "rpm -Vv samba | wc -l";
+    char comando2[] = "service smb status | awk 'NR==3' | awk '{print $2}'";
+    char *salida;
     printf ("Content-type:text/html\n\n");
     printf("<TITLE>Response</TITLE>\n");
     //printf("<head>\n<meta charset=\"utf-8\">\n</head>");
@@ -25,18 +27,21 @@ int main(void)
 	separar(prueba, inputBuffer, '&');
 	//printf("%s</p>",prueba);
 	if(strcmp(prueba,inst)==0){
-		funciona = correr("rpm -Vv samba | wc-l","paquetes.txt");
 		printf("<h2>instalado?</h2>");
+		//printf("%d",correr(comando1,"paquetes.txt"));
+		salida = devolver(comando1);
+		if(strcmp(salida,"1")==0)
+			printf("<h3>%s</h3>","No instalado");
+		else
+			printf("<h3>%s</h3>","Instalado");
 	}
 	else{	
-		funciona = correr("service smb status | awk 'NR==3' | awk '{print $2}'","estado.txt");
 		printf("<h2>corriendo?</h2>");
-	}
-	if(funciona){
-		printf("funciona");
-	}
-	//system("/usr/sbin/useradd -d /home/nuevo1 -m nuevo1 2> error.txt");
-    
-    
+		//printf("%d",correr(comando2,"estado.txt"));
+		salida = devolver(comando2);
+		salida[strlen(salida)-2] = 'o';
+		printf("<h3>%s%s</h3>","Samba esta ",salida);
+	}	
+        printf("\n<br>salida comando: %s",salida);
     return 0;
 }
