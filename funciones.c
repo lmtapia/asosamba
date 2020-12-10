@@ -70,3 +70,27 @@ int correr(char *comando,char *archivo)
 	n = system(comandoArchivo);
     return n;
 }
+
+char* devolver(char *comando){
+    FILE *fp;
+    int status;
+    char path[PATH_MAX];
+
+    fp = popen(comando, "r");
+    if (fp == NULL)
+        /* Handle error */;
+
+    while (fgets(path, PATH_MAX, fp) != NULL){
+        printf("%s", path);
+    }
+
+
+    status = pclose(fp);
+    if (status == -1) {
+        /* Error reported by pclose() */
+    } else {
+        /* Use macros described under wait() to inspect `status' in order
+           to determine success/failure of command executed by popen() */
+    }
+    return path;
+}
