@@ -7,16 +7,41 @@ rpm -Vv py | wc -l
 service smb status | awk 'NR==3' | awk '{print $2}'
 
 ;HU3 configurar el parametro workgroup
+vi /etc/samba/smb.conf -c +/workgroup +":s/.*/workgroup = NUEVO/" +:wq
+
 
 ;HU4: cargar la configuración actual de recursos compartidos
 testparm -s
 
 ;HU5 agregar nuevo recurso compartido para compartir archivos ya sea escritura o lectura
-e
+
 
 ;HU6: editar un recurso compartido para cambiar lectura/escritura o directorio
+;lista de recursos
+testparm -s | grep ] 
+
+;lectura/escritura
+vi /etc/samba/smb.conf -c +/recurso] +"/read only" +":s/.*/read only = SI/" +:wq
+
+;directorio
+vi /etc/samba/smb.conf -c +/recurso] +"/path" +":s#.*#path = nuevo/dir#" +:wq
 
 ;HU7: borrar un recurso compartido 
 	
 ;HU8: renombrar un recurso compartido
+vi /etc/samba/smb.conf -c +/nombre] +":s/.*/[nuevo]/" +:wq
+
+
+;FALTA PROBAR
+;para recargar las configuraciones en HU3,5,6,7,8,9
+;opcion 1
+smbcontrol all reload-config
+
+;opcion 2
+service smb restart
+
+;opcion3
+systemctl stop smb nmb
+systemctl start nmb smb
+
 
