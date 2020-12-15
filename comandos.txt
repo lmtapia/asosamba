@@ -9,16 +9,14 @@ service smb status | awk 'NR==3' | awk '{print $2}'
 ;HU3 configurar el parametro workgroup
 
 ;HU4: cargar la configuración actual de recursos compartidos
+testparm -s
 
 ;HU5 agregar nuevo recurso compartido para compartir archivos ya sea escritura o lectura
-samba-tool
-	sites create
+e
 
 ;HU6: editar un recurso compartido para cambiar lectura/escritura o directorio
 
 ;HU7: borrar un recurso compartido 
-samba-tool
-	sites remove
 	
 ;HU8: renombrar un recurso compartido
 

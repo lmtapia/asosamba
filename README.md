@@ -1,8 +1,8 @@
 # asosamba
-Para correr, desde linea de comandos ejecutar (superusuario):
+Para copiar desde linea de comandos ejecutar (superusuario):
 ```sh
-sh prueba.sh
-sh copy.sh
+./copy.sh
+service apache2 start
 ```
 
 Guardar en el directorio 'cgi-bin/' los ejecutables (codigo compilado) y en 'htdocs/' los archivos .htm
@@ -23,12 +23,16 @@ void separar(char *cadena, char *linea, char separador);
 int correr(char *comando,char *archivo);
 
 //funcion que devuelve la salida de un comando
-char* devolver(char *comando);
+char **devolver(char *comando);
 ```
 
 Para compilar nuevo codigo 
 ```sh
-gcc -Wall -c nuevo.c
-gcc -o cgi-bi/nuevo funciones.o nuevo.o 
-chmod gu+s cgi-bin/nuevo
+./compile.sh nuevo funciones
+```
+
+Para el codigo existente
+```sh
+./compile.sh prueba funciones
+./compile.sh testparm funciones
 ```
