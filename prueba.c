@@ -15,7 +15,7 @@ int main(void)
     char comando2[] = "service smb status | awk 'NR==3' | awk '{print $2}'";
     char **salida;
     printf ("Content-type:text/html\n\n");
-    printf("<TITLE>Response</TITLE>\n");
+    printf("<TITLE>Comprobando samba</TITLE>\n");
     //printf("<head>\n<meta charset=\"utf-8\">\n</head>");
 	
 	inputBuffer = entrada();    
@@ -27,7 +27,7 @@ int main(void)
 	separar(prueba, inputBuffer, '&');
 	//printf("%s</p>",prueba);
 	if(strcmp(prueba,inst)==0){
-		printf("<h2>instalado?</h2>");
+		printf("<h2>Samba esta instalado?</h2>");
 		//printf("%d",correr(comando1,"paquetes.txt"));
 		salida = devolver(comando1);
 		if(strcmp(salida[0],"1")==0)
@@ -36,12 +36,12 @@ int main(void)
 			printf("<h3>%s</h3>","Instalado");
 	}
 	else{	
-		printf("<h2>corriendo?</h2>");
+		printf("<h2>Samba esta corriendo?</h2>");
 		//printf("%d",correr(comando2,"estado.txt"));
 		salida = devolver(comando2);
 		salida[0][strlen(salida[0])-2] = 'o';
 		printf("<h3>%s%s</h3>","Samba esta ",salida[0]);
 	}	
-        printf("\n<br>salida comando: %s",salida[0]);
+        //printf("\n<br>salida comando: %s",salida[0]);
     return 0;
 }

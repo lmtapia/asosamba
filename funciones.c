@@ -115,8 +115,13 @@ int correr(char *comando,char *archivo)
 {	int length = sizeof(comando) + sizeof(archivo)+3;
 	char comandoArchivo[length];
 	int n;
-	sprintf(comandoArchivo, "%s > %s", comando, archivo);
-	n = system(comandoArchivo);
+	if(strcmp(archivo,"")!=0)
+	{
+		sprintf(comandoArchivo, "%s > %s", comando, archivo);
+		n = system(comandoArchivo);
+	}
+	else
+		n = system(comando);	
     return n;
 }
 

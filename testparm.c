@@ -17,13 +17,15 @@ int main(void)
     int i;
 
     printf ("Content-type:text/html\n\n");
-    printf("<TITLE>Response</TITLE>\n");  
+    printf("<TITLE>Cargando configuracion</TITLE>\n");  
     
     inputBuffer = entrada();
     contentLength = strlen(inputBuffer);
-    printf("<br>Datos Formulario: %s\n", inputBuffer);
-    printf("<br>Tama&ntildeo: %d\n",contentLength);
-
+    //printf("<br>Datos Formulario: %s\n", inputBuffer);
+    //printf("<br>Tama&ntildeo: %d\n",contentLength);
+    printf("<h5>Este es un resumen de las configuraciones de samba</h5>");
+    printf("<h5>no muestra las configuraciones por defecto </h5>");
+ 
     salida = devolver(comando4);
     printf("<textarea id=\"test\" name\"test\" rows=30 cols=50>\n");
     i=0;
