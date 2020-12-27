@@ -8,87 +8,69 @@
 
 #include <sys/types.h>
 #include <unistd.h>
-
-
-void separar(char *cadena, char *linea, char separador){
-    int x, y;
-    x = 0; y = 0;
-
-    while ((linea[x]) && (linea[x] != separador)){
-    	cadena[x] = linea[x];
-    	x = x + 1;
-    }
-    
-    cadena[x] = '\0';
-    if (linea[x]) ++x;
-        y = 0;
-        while (linea[y] = linea[x]){
-        	linea[y] = linea[x];
-        	y++;
-        	x++;
-        }
-}
+#include "funciones.h"
 
 int main(){
-    char *lenstr;
-    char inputBuffer[MAXLEN];
-    int contentLength;
-    int i;
-    char x;
+    //char *lenstr;
+    char *inputBuffer;
+    //int contentLength;
     char r_opcion[80];
- 
+    FILE *fs;
+    int estado=MAXLEN;
+    char *version;
     printf("Content-type:text/html\n\n");
-    printf("<TITLE>Response</TITLE>\n");
-    lenstr = getenv("CONTENT_LENGTH");
+    printf("<TITLE>Ejecutando servidor</TITLE>\n");
+    
+    // Cambiando nuevo ID y GID
+    if((setuid(0)) < 0) printf("\n<br>setuid: operacion no permitida\n");
+    if((setgid(0)) < 0) printf("\n<br>setgid: operacion no permitida\n");
 
-    if (lenstr!= NULL){
-	contentLength = atoi(lenstr);
-    }
-    else 
-        contentLength = 0;
-
-        if (contentLength > sizeof(inputBuffer)-1)
-    	contentLength = sizeof(inputBuffer)-1;
-
-        i = 0;
-
-        while (i < contentLength){
-    	   x = fgetc(stdin);
-        	if (x==EOF) break;
-        	inputBuffer[i] = x;
-        	i++;
-        }
-
-        inputBuffer[i] = '\0';
-        contentLength = i;
+    inputBuffer = entrada();
 
     //printf("<br>Datos Formulario: %s\n", inputBuffer);
     //printf("<br>Tama&ntildeo: %d\n",contentLength);
 
-
     separar(r_opcion, inputBuffer, '=');
     separar(r_opcion, inputBuffer, '&');
 
+    printf("<h5>Ejecutando accion: %s<h5>",r_opcion);
     //  iniciar el servicio samba
     if(strcmp(r_opcion,"option1") == 0){
-    	system("service smb start") || system("/etc/init.d/smb start");
-        printf("<p> El servidor se ha iniciado");
+    	//system("service smb start") || system("/etc/init.d/smb start");
+        fs = abrir("systemctl start smb nmb");
+	estado = cerrar(fs);
+	if(estado==0)
+		printf("<p> El servidor se ha iniciado</p>");
     }
     //  parar el servicio samba
     if(strcmp(r_opcion,"option2") == 0){
-        system("service smb stop") || system("/etc/init.d/smb stop");
-        printf("<p> El servidor se ha detenido");	
+        //system("service smb stop") || system("/etc/init.d/smb stop");
+        fs = abrir("systemctl stop nmb smb");
+        estado = cerrar(fs);
+        if(estado==0)
+               printf("<p> El servidor se ha detenido</p>");	
     }
     //  reiniciar el servicio samba
     if(strcmp(r_opcion,"option3") == 0){
-        system("service smb restart") || system("/etc/init.d/smb restart");
-        printf("<p> El servidor se ha reiniciado");    
+        //system("service smb restart") || system("/etc/init.d/smb restart");
+        fs = abrir("systemctl reload-or-restart smb nmb");
+        estado = cerrar(fs);
+        if(estado==0)
+		printf("<p> El servidor se ha reiniciado</p>");    
     }
     if(strcmp(r_opcion,"option4") == 0){
-        printf("<p> Verificar version de Samba");
-        system("smbd -V");
+        printf("<p> Verificar version de Samba</p>");
+        fs = abrir("smbd -V");
+	printf("<textarea disabled rows=\"4\" cols=\"50\">\n");
+	version = (char *) malloc(MAXLEN * sizeof(char));		
+	while(fgets(version,MAXLEN*sizeof(char),fs)!=NULL)
+	{	printf(version);
+	}
+	printf("</textarea>\n");
+	estado = cerrar(fs);
     }
+    if(estado!=0)
+	printf("<p> No se pudo completar la accion</p>");
     //Fin de las condiciones
-printf("<p>%s",r_opcion);
 return 0;
 }
