@@ -9,13 +9,13 @@
 int main(void)
 {	
     char *inputBuffer;
-    char inst[] = "inst";
     char comando4[3][80] = {"vim /etc/samba/smb.conf -c +/workgroup +\":s/.*/workgroup = ",
 	                "WORKGROUP",
                         "/\" +:wq"}; 
     char *comando;
     int estado;
     FILE *fs;
+
     printf ("Content-type:text/html\n\n");
     printf("<TITLE>Cambio de workgroup</TITLE>\n");
     //printf("<head>\n<meta charset=\"utf-8\">\n</head>");

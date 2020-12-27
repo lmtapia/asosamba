@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
-#define MAXLEN 1024
+#define MAXLEN 1024 
 /* Converts a hex character to its integer value */
 char from_hex(char ch) {
   return isdigit(ch) ? ch - '0' : tolower(ch) - 'a' + 10;
@@ -143,26 +143,30 @@ int cerrar(FILE *fp)
     return status;
 }
 
-
 char **devolver(char *comando)
+{   return devolverNFilas(comando,MAXLEN);
+}
+
+char **devolverNFilas(char *comando,int filas)
 {
     FILE *fp;
     char **path;
     int i;
    
-    path = (char **) malloc(MAXLEN*sizeof(char *));
+    path = (char **) malloc(filas*sizeof(char *));
     fp = abrir(comando);
     if (fp == NULL)
         printf("No se pudo ejecutar la accion");
-    path[0] = malloc(MAXLEN*sizeof(char));
+    path[0] = (char*) malloc(MAXLEN*sizeof(char));
     i=0;
-    while (fgets(path[i], MAXLEN, fp) != NULL){
+    while (fgets(path[i], MAXLEN*sizeof(char), fp) != NULL){
         //printf("ejecutando ...\n");
 	//path[i] = realloc(path[i],strlen(path[i])*sizeof(char));
 	i++;
-	path[i] = malloc(MAXLEN*sizeof(char));
+	path[i] = (char*) malloc(MAXLEN*sizeof(char));
     }
-    path[i] = NULL;
+    if(i<filas)
+    	path[i] = NULL;
     //path = realloc(path,(i+1)*sizeof(char *));
     
     cerrar(fp);

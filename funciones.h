@@ -12,6 +12,8 @@ int correr(char *comando,char *archivo);
 
 //devuelve la salida de un comando
 char **devolver(char *comando);
+//igual al anterior con numero maximo de filas variable 
+char **devolverNFilas(char *comando,int filas);
 
 //devuelve el puntero al stream de un comando 
 FILE *abrir(char *comando);

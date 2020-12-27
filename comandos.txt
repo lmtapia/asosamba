@@ -18,16 +18,23 @@ testparm -s
 
 ;HU6: editar un recurso compartido para cambiar lectura/escritura o directorio
 ;lista de recursos
-testparm -s | grep ] 
+testparm -s | grep ] | sed 's/^.//;s/.$//' 
+;informacion de un recurso
+testparm -s | sed -e '/SIGUIENTE/,$d' | sed -s -n '/RECURSO/,$p'
+
 
 ;lectura/escritura
-vi /etc/samba/smb.conf -c +/recurso] +"/read only" +":s/.*/read only = SI/" +:wq
+vi /etc/samba/smb.conf -c +/RECURSO] +"/read only" +":s/.*/read only = yes/" +:wq
 
 ;directorio
-vi /etc/samba/smb.conf -c +/recurso] +"/path" +":s#.*#path = nuevo/dir#" +:wq
+vi /etc/samba/smb.conf -c +/RECURSO] +"/path" +":s#.*#path = nuevo/dir#" +:wq
 
 ;HU7: borrar un recurso compartido 
 	
+testparm -s | sed -e '/RECURSO/,$d'> borrando
+testparm -s | sed -s -n '/SIGUIENTE/,$p' >> borrando
+cp borrando /etc/samba/smb.conf
+
 ;HU8: renombrar un recurso compartido
 vi /etc/samba/smb.conf -c +/nombre] +":s/.*/[nuevo]/" +:wq
 
