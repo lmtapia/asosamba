@@ -18,6 +18,9 @@ _abrir localhost/servidor.htm en el navegador_
 + HU7:borrar un recurso compartido 
 + HU8: renombrar un recurso compartido
 ```
+
+### lista de integrantes del proyecto en integrantes.txt
+
 ## Para desarrolladores
 _Guardar en el directorio 'cgi-bin/' los ejecutables (codigo compilado) y en 'htdocs/' los archivos .htm_
 ### Cobertura de requerimientos
@@ -32,6 +35,8 @@ _Guardar en el directorio 'cgi-bin/' los ejecutables (codigo compilado) y en 'ht
       |-- testparm         :{HU4}
       |-- edit1,edit2,edit3:{HU6-HU8}
 ```	
+### Lista de comandos bash en comandos.txt
+
 ### Incluir en nuevo programa la libreria funciones
 ```c
 #include "funciones.h"

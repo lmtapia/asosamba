@@ -6,40 +6,60 @@ rpm -Vv py | wc -l
 ;devuelve inactive o active
 service smb status | awk 'NR==3' | awk '{print $2}'
 
+;iniciar detener o reiniciar servicio
+systemctl smb nmb start
+systemctl nmb smb stop
+systemctl smb nmb reload-or-retart
+
+
 ;HU3 configurar el parametro workgroup
 vi /etc/samba/smb.conf -c +/workgroup +":s/.*/workgroup = NUEVO/" +:wq
 
 
 ;HU4: cargar la configuración actual de recursos compartidos
+;resumen
 testparm -s
+
+;smb.conf
+cat /etc/samba/smb.conf
 
 ;HU5 agregar nuevo recurso compartido para compartir archivos ya sea escritura o lectura
 
 
 ;HU6: editar un recurso compartido para cambiar lectura/escritura o directorio
 ;lista de recursos
+testparm -s | grep ]
+
+;lista de recursos sin corchetes
 testparm -s | grep ] | sed 's/^.//;s/.$//' 
+
 ;informacion de un recurso
 testparm -s | sed -e '/SIGUIENTE/,$d' | sed -s -n '/RECURSO/,$p'
 
-
-;lectura/escritura
+;cambiar lectura/escritura
 vi /etc/samba/smb.conf -c +/RECURSO] +"/read only" +":s/.*/read only = yes/" +:wq
 
-;directorio
+;cambiar directorio
 vi /etc/samba/smb.conf -c +/RECURSO] +"/path" +":s#.*#path = nuevo/dir#" +:wq
 
 ;HU7: borrar un recurso compartido 
-	
+;copia todo lo anterior al recurso
 testparm -s | sed -e '/RECURSO/,$d'> borrando
+
+;copia todo despues del recurso
 testparm -s | sed -s -n '/SIGUIENTE/,$p' >> borrando
+
+;actualiza el archivo de configuracion
 cp borrando /etc/samba/smb.conf
 
 ;HU8: renombrar un recurso compartido
 vi /etc/samba/smb.conf -c +/nombre] +":s/.*/[nuevo]/" +:wq
 
 
-;FALTA PROBAR
+;EXTRA
+;revisar version de samba
+smbd --version
+
 ;para recargar las configuraciones en HU3,5,6,7,8,9
 ;opcion 1
 smbcontrol all reload-config

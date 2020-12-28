@@ -15,9 +15,13 @@ int main(void)
     char comando2[] = "service smb status | awk 'NR==3' | awk '{print $2}'";
     char **salida;
     printf ("Content-type:text/html\n\n");
+    printf("<head>\n<meta charset=\"utf-8\">\n");
     printf("<TITLE>Comprobando samba</TITLE>\n");
-    //printf("<head>\n<meta charset=\"utf-8\">\n</head>");
-	
+    printf("<link rel=\"stylesheet\" href=\"/style.css\">\n</head>");
+    printf("<body>\n<img src=\"https://www.samba.org/~metze/samba.logos/Samba_Logo_4c.png\" height=\"30\" align=\"left\">\n<br>");
+    printf("<div class=\"card-body align-center\">\n<h1> ASOSAMBA </h1>\n");
+    printf(" <h2> samba desde web + c</h2>\n</div>\n<div class=\"align-center\">\n");
+
 	inputBuffer = entrada();    
     // Cambiando nuevo ID y GID
 	if((setuid(0)) < 0) printf("\n<br>setuid: operacion no permitida\n");
@@ -43,5 +47,6 @@ int main(void)
 		printf("<h3>%s%s</h3>","Samba esta ",salida[0]);
 	}	
         //printf("\n<br>salida comando: %s",salida[0]);
+	printf("</div>\n</body>");
     return 0;
 }
