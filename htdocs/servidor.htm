@@ -2,50 +2,72 @@
 <head>
 	<meta charset="utf-8">
 	<TITLE> asosamba </TITLE>
+	<link rel="stylesheet" href="style.css">
 </head>	
 <body>
-<h2> asosamba, samba desde web + c</h1>	
-<FORM ACTION="cgi-bin/prueba" METHOD="POST">
-Prueba: <select name=prueba>
-	<option value="inst">Instalado
-	<option value="run">Corriendo
-       </select><br>
-</p>
-<INPUT TYPE="SUBMIT" VALUE="COMPROBAR">
-</FORM>
+	<img src="https://www.samba.org/~metze/samba.logos/Samba_Logo_4c.png" height="30"
+  align="left"><br>
+	<div class="card-body align-center">
+		<h1> ASOSAMBA </h1>
+		<h2> samba desde web + c</h2>	
+	</div>
+	<div class="align-center">
+		<h3>Comprobacion servidor SAMBA</h3>
+		<FORM ACTION="cgi-bin/prueba" METHOD="POST">
+			<p>
+			Prueba:<select name=prueba>
+				  <option value="inst">Instalado</option>
+					<option value="run">Corriendo</option>
+					</select><br>
+			</p>
+			<div class="form-check">	
+			  <INPUT TYPE="SUBMIT" class="btn btn-primary" VALUE="COMPROBAR"/>
+			</div>
+		</FORM>
+		<br>
 
+		<FORM ACTION="cgi-bin/ServidorSamba" METHOD="POST">
+			<h3> Ejecutar en el servidor SAMBA</h3>
+			Accion para el servidor: <select name=accion>
+				<option value="option1">Iniciar</option>
+				<option value="option2">Parar</option>
+				<option value="option3">Reiniciar</option>
+				<option value="option4">Version</option>
+			</select>
+			<div class="form-check">	
+				<INPUT TYPE="SUBMIT" class="btn btn-primary" VALUE="EJECUTAR"/>
+			</div>
+		</FORM>
+		<br>
 
-<FORM ACTION="cgi-bin/ServidorSamba" METHOD="POST">
-Accion para el servidor: <select name=accion>
-        <option value="option1">Iniciar
-        <option value="option2">Parar
-	<option value="option3">Reiniciar
-	<option value="option4">Version
-       </select><br>
-</p>
-<INPUT TYPE="SUBMIT" VALUE="EJECUTAR">
-</FORM>
-<br>
+		<h3> Configurar el parametro <code> workgroup </code> </h3>
+		<FORM ACTION="cgi-bin/workgroup" METHOD="POST">
+		workgroup: <INPUT NAME="workgroup"  SIZE="20" MAXLENGTH="80" VALUE="WORKGROUP"/><Br>
+			<div class="form-check">	
+				<INPUT TYPE="SUBMIT" class="btn btn-primary"  VALUE="CAMBIAR"/>
+			</div>
+		</FORM>
+		<br>
 
-<FORM ACTION="cgi-bin/workgroup" METHOD="POST">
-<p> Configurando el parametro <code> workgroup </code> </p>
-workgroup: <INPUT NAME="workgroup"  SIZE="60" MAXLENGTH="80" VALUE="WORKGROUP"><BR>
-<INPUT TYPE="SUBMIT" VALUE="CAMBIAR">
-</FORM>
-<br>
+    <h3> Revisar configuraciones </h3>
+		<FORM ACTION="cgi-bin/testparm" METHOD="POST">
+			Ver configuraciones: <select name=accion>
+				<option value ="resumen">resumen</option>
+				<option value ="archivo">smb.conf</option>
+			</select><br>
+			<div class="form-check">
+				<INPUT TYPE="SUBMIT" class="btn btn-primary" VALUE="VER">
+			</div>
+		</FORM>
+		<br>
 
-<FORM ACTION="cgi-bin/testparm" METHOD="POST">
-Ver configuraciones: <select name=accion>
-	<option value ="resumen">resumen		
-	<option value ="archivo">desde smb.conf
-</select><br>
-<INPUT TYPE="SUBMIT" VALUE="VER">
-</FORM>
-<br>
-
-<FORM ACTION="cgi-bin/edit1" METHOD="POST">
-<INPUT TYPE="SUBMIT" VALUE ="MODIFICAR RECURSOS"/>
-</FORM>
-
+		<h3> Modificar recursos compartidos </h3>
+		<FORM ACTION="cgi-bin/edit1" METHOD="POST">
+			<div class="form-check">			
+				<INPUT TYPE="SUBMIT" class="btn btn-primary" VALUE ="VER"/>
+		  </div>
+	  </FORM>
+	  <br>
+  </div>
 </body>
 </html>
