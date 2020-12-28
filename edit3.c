@@ -34,8 +34,13 @@ int main(void)
     int estado;
 
     printf ("Content-type:text/html\n\n");
+    printf("<head>\n<meta charset=\"utf-8\">\n");
     printf("<TITLE>Editando</TITLE>\n");
-    
+    printf("<link rel=\"stylesheet\" href=\"/style.css\">\n</head>");
+    printf("<body>\n<img src=\"https://www.samba.org/~metze/samba.logos/Samba_Logo_4c.png\" height=\"30\" align=\"left\">\n<br>");
+    printf("<div class=\"card-body align-center\">\n<h1> ASOSAMBA </h1>\n");
+    printf(" <h2> samba desde web + c</h2>\n</div>\n<div class=\"align-center\">\n");
+
     inputBuffer = entrada();
     //contentLength = strlen(inputBuffer);
     //printf("<br>Datos Formulario: %s\n", inputBuffer);
@@ -66,72 +71,73 @@ int main(void)
     */
     if(strcmp(borrar,"SI")==0)
     {
-    	printf("<p>borrando </p>\n");
+    	printf("<h4>Borrando recurso [%s</h4>\n",recurso);
 	sprintf(comando,"%s%s%s[%s",comando7[0],recurso,comando7[1],recurso);
-        //printf("<p>%s</p>",comando);
+        //printf("<h5>ejecutando %s</h5>",comando);
 	fs =  abrir(comando);
         estado = cerrar(fs);
         if(estado ==0){
-                printf("<p>copiando recursos antes de [%s</p>",recurso);
+                printf("<h5>copiando recursos antes de [%s</h5>",recurso);
         }
 	if(strcmp(siguiente,""))
 	{   sprintf(comando,"%s%s%s[%s",comando7[2],siguiente,comando7[3],recurso);
-            //printf("<p>%s</p>",comando);
+            //printf("<h5>ejecutando %s</h5>",comando);
             fs =  abrir(comando);
             estado = cerrar(fs);
             if(estado ==0){
-                printf("<p>copiando recursos despues de [%s</p>",recurso);
+                printf("<h5>copiando recursos despues de [%s</h5>",recurso);
             }
 	}
 	sprintf(comando,"%s[%s%s",comando7[4],recurso,comando7[5]);
-	//printf("<p>%s</p>",comando);
+	//printf("<h5>ejecutando %s</h5>",comando);
 	fs =  abrir(comando);
         estado = cerrar(fs);
         if(estado ==0){
-                printf("<p>borrado</p>");
+                printf("<h5>Borrado completo</h5>");
         }
     }
     else
     {
     	if(strcmp(sololectura,"")!=0)
 	{
-           printf("<p>cambiando la opcion de Solo lectura a  %s</p>\n",sololectura);
+           printf("<h4>cambiando la opcion de Solo lectura a <b>%s</b></h4>\n",sololectura);
 	   sprintf(comando,"%s%s%s%s%s",comando6lect[0],recurso,comando6lect[1],
 			   sololectura,comando6lect[2]);
-	   //printf("<p>%s</p>",comando);
+	   //printf("<h5>ejecutando %s</h5>",comando);
            fs =  abrir(comando);
 	   estado = cerrar(fs);
 	   if(estado ==0){
-	   	printf("<p>Completado</p>");
+	   	printf("<h5>Completado</h5>");
 	   }
 	}
 	if(strcmp(directorio,"")!=0)
 	{
-	   printf("<p>cambiando la opcion de Directorio a  %s</p>\n",directorio);
+	   printf("<h4>Cambiando la opcion de Directorio a <b>%s</b></h4>\n",directorio);
 	   sprintf(comando,"%s%s%s%s%s",comando6dir[0],recurso,comando6dir[1],
                            directorio,comando6dir[2]);
-           //printf("<p>%s</p>",comando);
+           //printf("<h5>ejecutando %s</h5>",comando);
 	   fs =  abrir(comando);
            estado = cerrar(fs);
            if(estado ==0){
-                printf("<p>Completado</p>");
+                printf("<h5>Completado</h5>");
            }
 
 	}
 	if(strcmp(nuevonombre,"")!=0)
 	{
-           printf("<p>cambiando el nombre del recurso  a  %s</p>\n",nuevonombre);
+           printf("<h4>Cambiando el nombre del recurso  a <b>%s</b></h4>\n",nuevonombre);
 	   sprintf(comando,"%s%s%s%s%s",comando8[0],recurso,comando8[1],
                            nuevonombre,comando8[2]);
-           //printf("<p>%s</p>",comando);
+           //printf("<h5>ejecutando%s</h5>",comando);
 	   fs =  abrir(comando);
            estado = cerrar(fs);
            if(estado ==0){
-                printf("<p>Completado</p>");
+                printf("<h5>Completado</h5>");
            }
 
 	}	   
     }
+    printf("</div></body>");
     return 0;
 }
 

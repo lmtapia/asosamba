@@ -19,8 +19,13 @@ int main(void)
     int estado;
 
     printf ("Content-type:text/html\n\n");
+    printf("<head>\n<meta charset=\"utf-8\">\n");
     printf("<TITLE>Cargando configuracion</TITLE>\n");  
-    
+    printf("<link rel=\"stylesheet\" href=\"/style.css\">\n</head>");
+    printf("<body>\n<img src=\"https://www.samba.org/~metze/samba.logos/Samba_Logo_4c.png\" height=\"30\" align=\"left\">\n<br>");
+    printf("<div class=\"card-body align-center\">\n<h1> ASOSAMBA </h1>\n");
+    printf(" <h2> samba desde web + c</h2>\n</div>\n<div class=\"align-center\">\n");
+
     inputBuffer = entrada();
     //contentLength = strlen(inputBuffer);
     //printf("<br>Datos Formulario: %s\n", inputBuffer);
@@ -34,13 +39,13 @@ int main(void)
     }
     else{
     	printf("<p>Este es un detalle de las  configuraciones de samba \n");
-        printf("en el archivo <code>/etc/samba/smb.cnf</code>,\n");
+        printf("en el archivo <code>/etc/samba/smb.conf</code>,\n");
         printf("puede diferir de la configuracion actual, ");
-	printf(" use resumen para comprobar</p>\n");
+	printf(" vea resumen para comprobar</p>\n");
 	//comando4[(sizeof comando4/ sizeof comando4[0]) -1]='v';
 	fs = abrir(comandoconf);
     }
-    printf("<textarea id=\"test\" name\"test\" rows=25  cols=65>\n");
+    printf("<textarea id=\"test\" name\"test\" rows=25  cols=40>\n");
     i=0;
     linea = (char *) malloc(2048*sizeof(char));
     while(fgets(linea, 2048*sizeof(char), fs) != NULL){	
@@ -49,9 +54,9 @@ int main(void)
     }
     free(linea);
     estado = cerrar(fs);
-    printf("%d lineas",i);
     printf("\n</textarea>\n");
-    
+    printf("<p>%d lineas</p>",i);
+    printf("</div></body>");    
     
    return estado;
 }

@@ -16,8 +16,13 @@ int main(void)
     int i = 1;
     char *siguiente;
     printf ("Content-type:text/html\n\n");
+    printf("<head>\n<meta charset=\"utf-8\">\n");
     printf("<TITLE>Editar un recurso compartido</TITLE>\n");
-    //printf("<head>\n<meta charset=\"utf-8\">\n</head>");
+   printf("<link rel=\"stylesheet\" href=\"/style.css\">\n</head>");
+    printf("<body>\n<img src=\"https://www.samba.org/~metze/samba.logos/Samba_Logo_4c.png\" height=\"30\" align=\"left\">\n<br>");
+    printf("<div class=\"card-body align-center\">\n<h1> ASOSAMBA </h1>\n");
+    printf(" <h2> samba desde web + c</h2>\n</div>\n<div class=\"align-center\">\n");
+
     //inputBuffer = entrada();    
     // Cambiando nuevo ID y GID
     if((setuid(0)) < 0) printf("\n<br>setuid: operacion no permitida\n");
@@ -27,6 +32,7 @@ int main(void)
     recursos = devolver(comandorecursos);
     if(recursos[1]!=NULL)
 	recursos[1][strlen(recursos[1])-1]=0;
+    
     while(i<1024 && recursos[i]!=NULL)
     {   if(i+1<1024 && recursos[i+1]!=NULL)
 	{   recursos[i+1][strlen(recursos[i+1])-1]=0;
@@ -37,10 +43,23 @@ int main(void)
 	     sprintf(siguiente,"");	     	     
 	}
 	
-	printf("%s%s%s%s%s\n","<option required onchange=\"this.form.submit()\" value=\"",recursos[i],siguiente,"\">",recursos[i]);
+	printf("%s%s%s%s%s%s\n","<option required onchange=\"this.form.submit()\" value=\"",recursos[i],siguiente,"\">",recursos[i],"</option>");
     	i++;
     }
-    printf("<INPUT type=\"SUBMIT\" VALUE=\"Ver\">\n");
+    printf("<INPUT type=\"SUBMIT\" class=\"btn btn-primary\" VALUE=\"Ver\"/>\n");
     printf("</FORM>");
+    
+    printf("<h3>Crear un recurso compartido</h3>");  
+    printf("<FORM ACTION=\"crear\" METHOD=\"POST\">\n");
+    printf("Nombre del recurso: <INPUT name=\"name\"/><br>\n ");
+    printf("Descripcion: <INPUT name=\"comment\"/><br>\n ");
+    printf("Directorio: <INPUT name=\"dir\"/><br>\n");
+    printf("Solo lectura: <select name=\"read only\"><br>\n");
+    printf("<option value=\"yes\">SI</option>\n");
+    printf("<option value=\"no\">NO</option>\n");
+    printf("</select><br>\n");
+    printf("<INPUT type=\"SUBMIT\" class=\"btn btn-primary\" VALUE=\"CREAR\"/>\n");
+    printf("</FORM>");
+    printf("</div></body>");
     return 0;
 }
