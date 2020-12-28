@@ -63,8 +63,8 @@ int main(){
         fs = abrir("smbd -V");
 	printf("<textarea disabled rows=\"4\" cols=\"50\">\n");
 	version = (char *) malloc(MAXLEN * sizeof(char));		
-	while(fgets(version,MAXLEN*sizeof(char),fs)!=NULL)
-	{	printf(version);
+	while(fgets(version,MAXLEN*sizeof(char),fs)!=NULL){	
+		printf(version);
 	}
 	printf("</textarea>\n");
 	estado = cerrar(fs);
