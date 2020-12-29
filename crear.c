@@ -3,6 +3,8 @@
 #include <unistd.h>
 #include <string.h>
 #include "funciones.h"
+int compartir(  char *ini_nom,char *path, char *inherit, char *read);
+
 int main(void)
 {
     char *inputBuffer;
@@ -12,11 +14,17 @@ int main(void)
     char directorio[80];
     char sololectura[80];
 
-    FILE *fs;
+    char ininom[40]="[";
+    char endnom[5]="] \n ";
+    char inicoment[60]="      comment = ";
+    char ruta[60]="\n     path = ";
+    char inherits[60]="\n      inherit acls = yes";
+    char readl[60]="\n      read only = ";
+    
     int estado;
 
     inputBuffer = entrada();
-    
+
     separar(nombre, inputBuffer, '=');
     separar(nombre, inputBuffer, '&');
     separar(descripcion, inputBuffer, '=');
@@ -34,7 +42,7 @@ int main(void)
     printf("<div class=\"card-body align-center\">\n<h1> ASOSAMBA </h1>\n");
     printf(" <h2> samba desde web + c</h2>\n</div>\n<div class=\"align-center\">\n");
 
-    inputBuffer = entrada();
+    
     //contentLength = strlen(inputBuffer);
     //printf("<br>Datos Formulario: %s\n", inputBuffer);
     //printf("<br>Tama&ntildeo: %d\n",contentLength);
@@ -44,12 +52,35 @@ int main(void)
 
     printf("<h5> Se esta creando [%s]</h5>",nombre);
    
-    printf("<p> nuevo nombre: %s",nombre);
-    printf("<p> descripcion: %s",descripcion);
-    printf("<p> directorio: %s",directorio);
-    printf("<p> solo lectura: %s",sololectura);
-   
-
+    strcat(nombre, endnom);
+    strcat(ininom, nombre);
+    strcat(inicoment,coment);
+    strcat(ruta, rutaDir);
+    strcat(readl, read);
+    estado = compartir(ininombre,coment, ruta, inherits, read_l);
+    if(estado == 0){
+        printf("<h5>Se ha creado el recurso compartido ",ininombre);
+        //printf("<p> nombre: %s",nombre);
+        printf("<p> descripcion: %s",descripcion);
+        printf("<p> directorio: %s",directorio);
+        printf("<p> solo lectura: %s",sololectura);
+    }
     printf("</div></body>");
+
+    fs = abrir("smbcontrol all reload");
+    cerrar(fs);
     return 0;
+}
+
+int compartir(  char *ini_nom,char *path, char *inherit, char *read){
+  int estado=0;
+  char buffer;
+  FILE *smb = fopen("/etc/samba/smb.conf", "a");
+    
+    fputs(ini, smb);
+    fputs(path, smb);
+    fputs(inherit, smb);
+    fputs(read, smb);
+  estado = fclose(smb);
+  return estado;
 }

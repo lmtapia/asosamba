@@ -2,7 +2,7 @@
 
 body {
 	background-color: lightblue;
-	background-image: url("http://en.opensuse.org/images/5/54/Wallpaper-idea-swirl.png"),linear-gradient(blue, white 25% , lightblue);
+	background-image: url("Wallpaper-idea-swirl.png"),linear-gradient(blue, white 25% , lightblue);
 	background-size: cover;
 
 }
