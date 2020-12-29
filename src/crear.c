@@ -16,7 +16,7 @@ int main(void)
     char sololectura[80];
 
     char ininombre[40]="\n[";
-    char endnombre[5]="] ";
+    char endnombre[5]="]";
     char inicoment[60]="\n      comment = ";
     char ruta[60]     ="\n      path = ";
     char inherits[60] ="\n      inherit acls = yes";

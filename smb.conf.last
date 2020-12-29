@@ -3,7 +3,7 @@
 # samba-doc package is installed.
 [global]
 	server max protocol = SMB2_10
-	workgroup = WORKGROUP
+workgroup = WORKGROUP
 	passdb backend = tdbsam
 	printing = cups
 	printcap name = cups
@@ -24,19 +24,23 @@
 	read only = yes
 	inherit acls = Yes
 
-[temp]
-	comment = temp folder
-	guest ok = No
-	inherit acls = Yes
-	path = /tmp
-	read only = No
-	vfs objects = 
-
-
-
-[documentos] 
+[documentos]
       comment = documentos del usuario luis
       guest ok = No
       path = /home/luis/Documents
       inherit acls = yes
+read only = no
+
+[asosamba]
+      comment = proyecto servidor samba
+      guest ok = No
+      path = /home/luis/Desktop/asosamba/
+      inherit acls = yes
       read only = no
+
+[temp]
+      comment = directorio temporal
+      guest ok = No
+      path = /temp
+      inherit acls = yes
+read only = no

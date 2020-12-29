@@ -68,8 +68,8 @@ int main(void)
 {
     char *inputBuffer;
     int contentLength;
-    int i;
-    char x;
+    //int i;
+    //char x;
     char mensaje[80];
     char usuario[80];
     char clave[80];
