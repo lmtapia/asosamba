@@ -48,6 +48,18 @@ int main(void)
     }
     printf("<INPUT type=\"SUBMIT\" class=\"btn btn-primary\" VALUE=\"Ver\"/>\n");
     printf("</FORM>");
+    
+    printf("<h3>Crear un recurso compartido</h3>");  
+    printf("<FORM ACTION=\"crear\" METHOD=\"POST\">\n");
+    printf("Nombre del recurso: <INPUT name=\"name\"/><br>\n ");
+    printf("Descripcion: <INPUT name=\"comment\"/><br>\n ");
+    printf("Directorio: <INPUT name=\"dir\"/><br>\n");
+    printf("Solo lectura: <select name=\"read only\"><br>\n");
+    printf("<option value=\"yes\">SI</option>\n");
+    printf("<option value=\"no\">NO</option>\n");
+    printf("</select><br>\n");
+    printf("<INPUT type=\"SUBMIT\" class=\"btn btn-primary\" VALUE=\"CREAR\"/>\n");
+    printf("</FORM>");
     printf("</div></body>");
     return 0;
 }

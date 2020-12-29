@@ -47,6 +47,10 @@ _Guardar en el directorio 'cgi-bin/' los ejecutables (codigo compilado) y en 'ht
 ```
 ### Para el codigo existente
 ```sh
+./compileAll.sh
+```
+o uno por uno
+```sh
 ./compile.sh prueba funciones
 ./compile.sh testparm funciones
 ./compile.sh workgroup funciones
@@ -54,6 +58,7 @@ _Guardar en el directorio 'cgi-bin/' los ejecutables (codigo compilado) y en 'ht
 ./compile.sh edit2 funciones
 ./compile.sh edit3 funciones
 ```
+
 
 ### funciones.h define las funciones: 
 ```c
