@@ -50,5 +50,8 @@ int main(void)
 	   }	   
 	}
 	printf("</div></body>");	
+
+	fs = abrir("smbcontrol all reload");
+    cerrar(fs);
     return 0;
 }

@@ -16,6 +16,10 @@ service apache2 start
 ```
 _abrir localhost/servidor.htm en el navegador_
 
+_configurar contraseña para cada usuario_
+```sh
+smbpassw -a usuario
+```
 ### Requerimientos
 ```diff
 + HU01: verificar si el servidor Samba está instalado
