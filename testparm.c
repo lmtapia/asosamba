@@ -45,7 +45,7 @@ int main(void)
 	//comando4[(sizeof comando4/ sizeof comando4[0]) -1]='v';
 	fs = abrir(comandoconf);
     }
-    printf("<textarea id=\"test\" name\"test\" rows=25  cols=40>\n");
+    printf("<textarea id=\"test\" disabled name\"test\" rows=25  cols=40>\n");
     i=0;
     linea = (char *) malloc(2048*sizeof(char));
     while(fgets(linea, 2048*sizeof(char), fs) != NULL){	
