@@ -1,11 +1,11 @@
-gcc -Wall -c funciones.c
-for F in *.c; 
-do 
-   if [[ $F != 'funciones.c' ]]
-   then	echo compilando $F
-	gcc -Wall -c $F 
-        gcc -o cgi-bin/${F%.c} funciones.o ${F%.c}.o
-        chmod gu+s cgi-bin/${F%.c}
+gcc -Wall -c src/funciones.c -o src/funciones.o
+for F in src/*.c; 
+do      
+   if [[ ${F:4: -2} != 'funciones' ]]
+   then	echo compilando ${F:4: -2}
+	gcc -Wall -c $F  -o ${F:0: -2}.o 
+        gcc -o cgi-bin/${F:4: -2} src/funciones.o ${F:0: -2}.o
+        chmod gu+s cgi-bin/${F:4: -2}
    fi
 done
 
