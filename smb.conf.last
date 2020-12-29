@@ -1,0 +1,42 @@
+# smb.conf is the main Samba configuration file. You find a full commented
+# version at /usr/share/doc/packages/samba/examples/smb.conf.SUSE if the
+# samba-doc package is installed.
+[global]
+	server max protocol = SMB2_10
+	workgroup = WORKGROUP
+	passdb backend = tdbsam
+	printing = cups
+	printcap name = cups
+	printcap cache time = 750
+	cups options = raw
+	map to guest = Bad User
+	logon path = \\%L\profiles\.msprofile
+	logon home = \\%L\%U\.9xprofile
+	logon drive = P:
+	usershare allow guests = Yes
+	include = /etc/samba/dhcp.conf
+	wins support = No
+	usershare max shares = 100
+[homes]
+	comment = Home Directories
+	valid users = %S, %D%w%S
+	browseable = No
+	read only = yes
+	inherit acls = Yes
+
+[temp]
+	comment = temp folder
+	guest ok = No
+	inherit acls = Yes
+	path = /tmp
+	read only = No
+	vfs objects = 
+
+
+
+[documentos] 
+      comment = documentos del usuario luis
+      guest ok = No
+      path = /home/luis/Documents
+      inherit acls = yes
+      read only = no

@@ -3,7 +3,8 @@
 #include <unistd.h>
 #include <string.h>
 #include "funciones.h"
-int compartir(  char *ini_nom,char *path, char *inherit, char *read);
+
+int compartir(char *ini_nom,char *coment,char *path, char *inherit, char *read);
 
 int main(void)
 {
@@ -14,14 +15,15 @@ int main(void)
     char directorio[80];
     char sololectura[80];
 
-    char ininom[40]="[";
-    char endnom[5]="] \n ";
-    char inicoment[60]="      comment = ";
-    char ruta[60]="\n     path = ";
-    char inherits[60]="\n      inherit acls = yes";
-    char readl[60]="\n      read only = ";
+    char ininombre[40]="\n[";
+    char endnombre[5]="] ";
+    char inicoment[60]="\n      comment = ";
+    char ruta[60]     ="\n      path = ";
+    char inherits[60] ="\n      inherit acls = yes";
+    char readl[60]    ="\n      read only = ";
     
     int estado;
+    FILE *fs;
 
     inputBuffer = entrada();
 
@@ -52,18 +54,20 @@ int main(void)
 
     printf("<h5> Se esta creando [%s]</h5>",nombre);
    
-    strcat(nombre, endnom);
-    strcat(ininom, nombre);
-    strcat(inicoment,coment);
-    strcat(ruta, rutaDir);
-    strcat(readl, read);
-    estado = compartir(ininombre,coment, ruta, inherits, read_l);
+    strcat(nombre, endnombre);
+    strcat(ininombre, nombre);
+    strcat(inicoment,descripcion);
+    strcat(ruta, directorio);
+    strcat(readl, sololectura);
+    strcat(readl, "");
+    estado = compartir(ininombre,inicoment, ruta, inherits, readl);
+    
     if(estado == 0){
-        printf("<h5>Se ha creado el recurso compartido ",ininombre);
-        //printf("<p> nombre: %s",nombre);
-        printf("<p> descripcion: %s",descripcion);
-        printf("<p> directorio: %s",directorio);
-        printf("<p> solo lectura: %s",sololectura);
+        printf("<h5>Se ha creado el recurso compartido %s</h5>",ininombre);
+        //printf("<p>%s</p>",ininombre);
+        printf("<p> %s</p>",inicoment);
+        printf("<p> %s</p>",ruta);
+        printf("<p> %s<p>",readl);
     }
     printf("</div></body>");
 
@@ -72,15 +76,24 @@ int main(void)
     return 0;
 }
 
-int compartir(  char *ini_nom,char *path, char *inherit, char *read){
-  int estado=0;
-  char buffer;
+int compartir(char *ininom,char *coment,char *path, char *inherit, char *read){
+  int estado;
+  //char buffer;
   FILE *smb = fopen("/etc/samba/smb.conf", "a");
-    
-    fputs(ini, smb);
-    fputs(path, smb);
-    fputs(inherit, smb);
-    fputs(read, smb);
+  //FILE *smb = fopen("smbcreando","a");
+  if(smb==NULL)
+  {
+	  printf("<h5> No se pude abrir el archivo</h5>");
+  }
+  else
+  {
+  	fputs(ininom, smb);
+    	fputs(coment,smb);
+    	fputs("\n      guest ok = No",smb);
+	fputs(path, smb);
+    	fputs(inherit, smb);
+    	fputs(read, smb);
+  }
   estado = fclose(smb);
   return estado;
 }
