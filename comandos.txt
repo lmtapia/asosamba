@@ -1,6 +1,6 @@
 ;HU1 : ver si samba esta instalado
 ; devuelve 1 si no esta instalado, mayor a 1 si lo esta  
-rpm -Vv py | wc -l
+rpm -Vv samba | wc -l
 
 ;HU2 : comprobar el estado del servicio samba
 ;devuelve inactive o active

@@ -6,7 +6,8 @@ tar -xzvf asosamba.tar.gz
 ```
 _Recompilar (opcional)_
 ```sh
-./asosamba/compileAll.sh
+cd asosamba
+./compileAll.sh
 ```
 _Copiar (ejecutar como superusuario):_
 ```sh

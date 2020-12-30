@@ -14,6 +14,8 @@ int main(void)
     char comando1[] = "rpm -Vv samba | wc -l";
     char comando2[] = "service smb status | awk 'NR==3' | awk '{print $2}'";
     char **salida;
+    int lineas;
+
     printf ("Content-type:text/html\n\n");
     printf("<head>\n<meta charset=\"utf-8\">\n");
     printf("<TITLE>Comprobando samba</TITLE>\n");
@@ -34,7 +36,8 @@ int main(void)
 		printf("<h2>Samba esta instalado?</h2>");
 		//printf("%d",correr(comando1,"paquetes.txt"));
 		salida = devolver(comando1);
-		if(strcmp(salida[0],"1")==0)
+		lineas = atoi(salida[0]);
+		if(lineas==1)
 			printf("<h3>%s</h3>","No instalado");
 		else
 			printf("<h3>%s</h3>","Instalado");
