@@ -1,0 +1,28 @@
+Problema: No se puede listar el contenido de algunos directorios compartidos 
+Solucion:
+	Modificacion a suse15 SELinux
+
+	ingresar como root e iniciar Yast
+
+	seleccionar Software › Software Management
+
+	seleccionar View › Search y asegurarse de marcar Name, Keywords y Summary. Ingresar la palbra 'selinux' y hacer click en Search. Se vera una lista de paquetes
+
+	asegurarse que todos los paquetes encontrados estan seleccionados y hacer click en Accept para instalarlos.
+
+	despues de instalar los paquetes de SELinux, es necesario modificar GRUB 2 boot loader. Desde YaST, seleccionar System › Boot Loader › Kernel Parameters. Añadir los siguientes parametros a Optional Kernel Command Line Parameters:
+
+	security=selinux selinux=1 enforcing=0
+
+	Reiniciar SUSE
+
+Problema: El propietario es el usuario root, solo permite lectura
+Solucion: cambiar el propietario a un usuario vinculado a una cuenta Windows
+	Existiendo una cuenta windows y un usuario linux relacionados por la configuracion de contraseñas de samba
+		smbpassw -a luis
+	
+	cambiar el propietario a este usuario
+		chown luis:users /opt/software
+	o cambiar los permisos
+		chmod 777 /opt/software
+

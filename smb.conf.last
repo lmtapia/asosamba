@@ -3,7 +3,9 @@
 # samba-doc package is installed.
 [global]
 	server max protocol = SMB2_10
-workgroup = WORKGROUP
+	workgroup = WORKGROUP
+	netbios name = SUSE15
+	server string = Suse15SambaServer
 	passdb backend = tdbsam
 	printing = cups
 	printcap name = cups
@@ -38,9 +40,16 @@ read only = no
       inherit acls = yes
       read only = no
 
-[temp]
+[software]
+      comment = instaladores varios
+      guest ok = No
+      path = /opt/software
+      inherit acls = yes
+      read only = no
+
+[temporal]
       comment = directorio temporal
       guest ok = No
-      path = /temp
+path = /tmp
       inherit acls = yes
-read only = no
+
